@@ -16,19 +16,15 @@ def ex():
 
 @app.route('/action')
 def action():
-    if os.environ['NAME']:
-        name = os.environ['NAME']
+    if os.getenv('NAME') is not None:
+        name = os.getenv("NAME")
     else:
         name = 'animal'
 
-    if os.environ['ACTIONS']:
-        if os.environ['ACTIONS'] is not None:
-            actionList = os.environ['ACTIONS'].split(',')
-            random.seed()
-            selection = random.randint(0, len(actionList) -1)
-        else:
-            actionList = ['is sleeping.']
-            selection = 0
+    if os.getenv('ACTIONS') is not None: 
+        actionList = os.getenv('ACTIONS').split(',')
+        random.seed()
+        selection = random.randint(0, len(actionList) -1)
     else:
         return ('The animal is not visible right now.', 200)
         
