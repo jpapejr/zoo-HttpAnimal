@@ -11,7 +11,10 @@ def hello():
 
 @app.route('/exhibit')
 def ex():
-    return ('<img src="https://www.naturalworldsafaris.com/media/3038/russ-maclaughlin-tiger-flipped.jpg?mw=940" height="25%" width="25%" />', 200)
+    if os.getenv('IMGURL') is not None: 
+        return ('<img src="' + os.getenv('IMGURL') + '" height="25%" width="25%" />', 200)
+    else:
+        return ('<img src="https://zoologyfoundation.org/wp-content/uploads/woocommerce-placeholder.png" height="25%" width="25%" />', 200)
 
 
 @app.route('/action')
